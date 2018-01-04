@@ -1,3 +1,5 @@
+"use strict";
+
 let carnivores = [];
 let herbivores = [];
 
@@ -6,12 +8,13 @@ let loadCarnivores = function(callback) {
   
   loader.open("GET", "data/carnivores.json");
   loader.send();
-    
+  
   loader.addEventListener("load", function() {
     carnivores = JSON.parse(this.responseText);
-    carnivores = carnivores.carnviores; 
+    carnivores = carnivores.species; 
     callback(carnivores);
   });
+  
 };
 
 let loadHerbivores = function(callback) {
@@ -22,7 +25,7 @@ let loadHerbivores = function(callback) {
       
     loader.addEventListener("load", function() {
       herbivores = JSON.parse(this.responseText);
-      herbivores = herbivores.herbivores; 
+      herbivores = herbivores.species; 
       callback(herbivores);
     });
   };
