@@ -1,0 +1,13 @@
+{
+    "herbivores": [
+        {
+            "species": "Giraffe"
+        },
+        {
+            "species": "Elephant"
+        },
+        {
+            "species": "Sloth"
+        }
+    ]
+}
