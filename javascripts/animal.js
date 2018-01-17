@@ -1,32 +1,18 @@
 "use strict";
-
-let carnivores = [];
+let $ = require('jquery');
 let herbivores = [];
+let carnivores = [];
 
-let loadCarnivores = function(callback) {
-  const loader = new XMLHttpRequest();
-  
-  loader.open("GET", "data/carnivores.json");
-  loader.send();
-  
-  loader.addEventListener("load", function() {
-    carnivores = JSON.parse(this.responseText);
-    carnivores = carnivores.species; 
-    callback(carnivores);
+function loadHerbivores() {
+  $.ajax({
+    url: "../data/herbivores.json" 
+  })
+  .done( (herbivoreData) => {
+    herbivores = herbivoreData.herbivores;
+    console.log("herbivores plz", herbivores);
+  }).fail( (error) => {
+    console.log("fail boat", error.statusText);
   });
-  
-};
+}
 
-let loadHerbivores = function(callback) {
-    const loader = new XMLHttpRequest();
-    
-    loader.open("GET", "data/herbivores.json");
-    loader.send();
-      
-    loader.addEventListener("load", function() {
-      herbivores = JSON.parse(this.responseText);
-      herbivores = herbivores.species; 
-      callback(herbivores);
-    });
-  };
-module.exports = { loadCarnivores, loadHerbivores };
+loadHerbivores();
