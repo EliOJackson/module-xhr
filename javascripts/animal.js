@@ -3,7 +3,7 @@ let $ = require('jquery');
 let herbivores = [];
 let carnivores = [];
 
-function loadHerbivores() {
+ module.exports.loadHerbivores = () => {
   $.ajax({
     url: "../data/herbivores.json" 
   })
@@ -13,6 +13,19 @@ function loadHerbivores() {
   }).fail( (error) => {
     console.log("fail boat", error.statusText);
   });
-}
+};
 
-loadHerbivores();
+module.exports.loadCarnivores = () => {
+  $.ajax({
+    url: "../data/carnivores.json" 
+  })
+  .done( (carnivoreData) => {
+    carnivores = carnivoreData.carnivores;
+    console.log("carnivores plz", carnivores);
+  }).fail( (error) => {
+    console.log("fail boat", error.statusText);
+  });
+};
+
+module.exports.loadHerbivores();
+module.exports.loadCarnivores();
