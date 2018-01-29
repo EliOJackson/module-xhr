@@ -1,23 +1,24 @@
+
 "use strict";
 
-const animal = require('./animal');
-const $ = require('jquery');
-animal.loadCarnivores(showCarnivores);
-animal.loadHerbivores(showHerbivores);
+let animal = require("./animal");
 
-function showCarnivores(carnivores) {
-    console.log("test", carnivores);
-    $('#carnivore').append(`<b>Carnivores:</b>`);
-    $.each(carnivores, (species, animal) => {
-        $('#carnivore').append(`<p>${species,animal}</p>`);
-    });
-    
-}
-function showHerbivores(herbivores) {
-    $('#herbivore').append(`<b>Herbivores:</b>`);
-    $.each(herbivores, (species, animal) => {
-        $('#herbivore').append(`<p>${species, animal}</p>`);
-    });
-    
-}
+let carnivoreDiv = document.getElementById("carnivores");
+let herbivoreDiv = document.getElementById("herbivores");
 
+let printCarnivores = function (carnivore) {
+    carnivoreDiv.innerHTML += "Carnivores: ";
+    carnivore.carnivores.forEach(element => {
+        carnivoreDiv.innerHTML += (element.species) + ', ';
+    });
+};
+let printHerbivores = function (herbivore) {
+    herbivoreDiv.innerHTML += "Herbivores: ";
+    herbivore.herbivores.forEach(element => {
+        herbivoreDiv.innerHTML += (element.species) + ', ';
+    });
+};
+
+
+animal.loadCarnivores(printCarnivores);
+animal.loadHerbivores(printHerbivores);
