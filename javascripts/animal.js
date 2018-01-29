@@ -1,33 +1,28 @@
-"use strict";
-let $ = require('jquery');
-let herbivores = [];
+'use strict';
+
 let carnivores = [];
+let herbivores = [];
 
- module.exports.loadHerbivores = (callBackToInvoke) => {
-  $.ajax({
-    url: "../data/herbivores.json" 
-  })
-  .done( (herbivoreData) => {
-    herbivores = herbivoreData.herbivores;
-    callBackToInvoke(herbivores);
-    console.log("herbivores plz", herbivores);
-  }).fail( (error) => {
-    console.log("fail boat", error.statusText);
+
+module.exports.loadCarnivores = function (callbackToInvoke) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", function () {
+    carnivores = JSON.parse(this.responseText);
+    callbackToInvoke(carnivores);
   });
+  xhr.open("GET", "data/carnivores.json");
+  xhr.send();
+
+};
+module.exports.loadHerbivores = function (callbackToInvoke) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", function () {
+    herbivores = JSON.parse(this.responseText);
+    callbackToInvoke(herbivores);
+  });
+  xhr.open("GET", "data/herbivores.json");
+  xhr.send();
+
 };
 
-module.exports.loadCarnivores = (callBackToInvoke) => {
-  $.ajax({
-    url: "../data/carnivores.json" 
-  })
-  .done( (carnivoreData) => {
-    carnivores = carnivoreData.carnivores;
-    callBackToInvoke(carnivores);
-    console.log("carnivores plz", carnivores);
-  }).fail( (error) => {
-    console.log("fail boat", error.statusText);
-  });
-};
 
-module.exports.loadHerbivores();
-module.exports.loadCarnivores();
